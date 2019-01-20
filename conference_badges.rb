@@ -5,17 +5,19 @@ def badge_maker(name)
 end
 
 def batch_badge_creator(attendees)
+  i=0
   badge=[]
-  badge_maker(attendees).each do |name| 
-    badge.push(name)
+  until i>=attendees.length
+    badge.push(badge_maker(attendees[i]))
+    i+=1
   end
   return badge
 end
 
 def assign_rooms(attendees)
   speaking_in_room=[]
-  attendees.each_with_index do |name,index| 
-    speaking_in_room[index] = "Hello, #{name}! You'll be assigned to room #{index+1}!"
+  attendees.each_with_index do |item,index| 
+    speaking_in_room[index] = "Hello, #{attendees[index]}! You'll be assigned to room #{index+1}!"
   end
   return speaking_in_room.uniq
 end
@@ -26,5 +28,4 @@ def printer(attendees)
   end
   assign_rooms(attendees).each do |room|
     puts room
-  end
 end
